@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Network Node Tool - Extract, Check & Filter</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>🌐 Pi Network Node Tool</h1>
+    <div class="subtitle">Extract addresses from junk HTML → Check live nodes → Filter Pi Network (not Testnet)</div>
 
+    <div class="row">
+        <!-- Left Panel -->
+        <div class="panel">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="extract">📋 Step 1: Extract IPs</button>
+                <button class="tab-btn" data-tab="check">🔍 Step 2: Check & Filter</button>
+            </div>
+
+            <div id="extractTab" class="tab-content active">
+                <h3>📋 Paste Junk HTML / Table Code</h3>
+                <textarea id="junkInput" placeholder='Paste your junk HTML table here...
+                Example:
+                <table>
+                <tr>
+                    <td><span class="badge bg-success">Connected</span></td>
+                    <td><code>35.228.152.141:31402</code></td>
+                </tr>
+                </table>'>
+                </textarea>
+                <div>
+                    <button id="extractBtn" class="extract-btn">🔧 EXTRACT CONNECTED ADDRESSES</button>
+                    <button id="clearExtractBtn" class="clear-btn">🗑 Clear</button>
+                </div>
+                <div class="filter-info">
+                    ✅ Extracts addresses from rows with "Connected" status<br>
+                    🔄 Automatically converts port 31402 → 31401
+                </div>
+                <div class="stats" id="extractStats">
+                    📊 Ready - Paste junk HTML and click EXTRACT
+                </div>
+            </div>
+
+            <div id="checkTab" class="tab-content">
+                <h3>📋 IP:port List (one per line)</h3>
+                <textarea id="ipListInput" placeholder='Paste IP:port list here (one per line)...
+                Example:
+                34.47.29.105:31401
+                35.228.152.141:31401'>
+                </textarea>
+                <div>
+                    <button id="checkBtn">🔍 CHECK & FILTER PI NETWORK</button>
+                    <button id="clearCheckBtn" class="clear-btn">🗑 Clear</button>
+                </div>
+                <div class="filter-info">
+                    🔍 <strong>Filter:</strong> Only IPs with <code>"network_passphrase": "Pi Network"</code> will be shown.<br>
+                    ❌ IPs with "Pi Testnet" are automatically excluded.
+                </div>
+                <div class="stats" id="inputStats">
+                    📊 Ready - Paste IP list and click CHECK
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Results -->
+        <div class="panel">
+            <h3>✅ RESULTS: Pi Network Nodes (with http://)</h3>
+            <div class="result-box" id="resultBox">
+                💡 Use Step 1 to extract IPs from junk HTML, then Step 2 to check them<br><br>
+                <strong>Option 1:</strong> Paste junk HTML → Extract IPs → Copy results → Go to Step 2<br>
+                <strong>Option 2:</strong> Directly paste IP:port list → Check & Filter
+            </div>
+            <div>
+                <button id="copyResultBtn" class="copy-btn">📋 Copy Pi Network URLs</button>
+                <button id="clearResultBtn" class="clear-btn">🗑 Clear Results</button>
+            </div>
+            <div class="stats" id="resultStats">
+                📊 No results yet
+            </div>
+        </div>
+    </div>
+
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">Checking 0/0 IPs...</div>
+    </div>
+</div>
+</body>
+</html>
